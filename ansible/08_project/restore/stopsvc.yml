@@ -1,0 +1,7 @@
+- name: 서비스 중지
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+  loop:
+    - httpd
+

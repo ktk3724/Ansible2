@@ -1,0 +1,22 @@
+---
+- name: 웹서버 설정
+  hosts: webservers
+  gather_facts: true
+  tasks:
+    - name: 방화벽 포트 제거
+      ansible.builtin.include_tasks: 
+        file: restore/removefwrule.yml
+      vars:
+        ports: ['http','https']
+    - name: 웹 서버 설정파일 삭제 
+      ansible.builtin.include_tasks: 
+        file: restore/removefile.yml
+      vars:
+        files: /var/www/html/index.html
+
+    - name: 1) 웹 패키지 삭제
+      ansible.builtin.include_tasks: 
+        file: restore/removepkg.yml
+      vars: 
+        pkgs: ['httpd', 'mod_ssl']
+        

@@ -1,0 +1,10 @@
+---
+- name: 간단한 웹 서버 구축
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: 패키지 설치 - {{ ansible_local.custom.general.package }}
+      ansible.builtin.dnf:
+        name: "{{ ansible_local.custom.general.package }}"
+        state: present
+        
